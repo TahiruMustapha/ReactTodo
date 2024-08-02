@@ -1,0 +1,8 @@
+.app{
+    background-color: #009FBD;
+    height: 100vh;
+    overflow-y: hidden;
+    width:100vw;
+    overflow-x: hidden;
+    /* padding: 10px 20px; */
+}

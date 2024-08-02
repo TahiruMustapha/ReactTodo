@@ -1,0 +1,135 @@
+.main {
+  height: 100%;
+  padding: 0 20px;
+}
+.hidelist {
+  padding: 30px 0px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+.hidelistBtn {
+  background-color: #01204e89;
+  color: white;
+  border: none;
+}
+.hidelistBtn:hover {
+  border: none;
+  background-color: #01204ea6;
+}
+.hidelistBtn:focus {
+  border: none;
+  outline: none;
+}
+.myTodoList {
+  /* padding: 30px 0; */
+}
+.todo-changeList {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.todo-changeList input {
+  border: none;
+  padding: 7px 10px;
+  border-radius: 3px;
+  outline: none;
+}
+.todo-changeList button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 3px;
+  font-size: small;
+  background-color: #01204eba;
+  color: white;
+}
+.todo-changeList button:hover {
+  background-color: #01204eda;
+}
+.todo-changeList button:focus{
+    outline: none;
+}
+.todo-addTask {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.todo-addTask input {
+  border: none;
+  padding: 7px 10px;
+  border-radius: 3px;
+  outline: none;
+}
+.todo-addTask button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 3px;
+  font-size: small;
+  background-color: #01204eba;
+  color: white;
+}
+.todo-addTask button:hover {
+  background-color: #01204eda;
+}
+.todo-addTask button:focus{
+    outline: none;
+}
+.myTodoList {
+    padding-top: 0;
+}
+.taskBox {
+  display: flex;    
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  height: 2.5rem;
+}
+.taskBox:hover {
+  background-color: rgba(128, 128, 128, 0.237);
+  border-radius: 5px;
+}
+.task {
+  list-style: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.536);
+}
+.taskActions {
+  display: flex;
+  gap: 6px;
+  font-size: small;
+}
+.taskActions span:nth-child(1) {
+  background-color: #8adab2b0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.taskActions span:nth-child(1):hover{
+  background-color: #8ADAB2;
+}
+.taskActions span:nth-child(2) {
+  background-color: #31363fb7;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.taskActions span:nth-child(2):hover{
+  background-color: #31363F;
+}
+
+.taskActions span:nth-child(3) {
+  background-color: #00214dac;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.taskActions span:nth-child(3):hover{
+  background-color: #00224D;
+}
+.todoContainer{
+    
+    margin: 10px 0;
+}
