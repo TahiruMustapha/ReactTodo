@@ -57,7 +57,7 @@ const Todo = () => {
     setEditingId(index);
     setEditTask(task);
   };
- 
+
   const handleEditTask = (e) => {
     // setEditTaskInput(e.target.value);
     let value = e.target.value;
@@ -66,18 +66,17 @@ const Todo = () => {
   const updateTaskFunction = () => {
     const edittedText = editTask.trim();
     // console.log(edittedText);
-    if (edittedText !== "" && editIndex > -1) {
-      editTaskFunction(editIndex, edittedText);
+    if (edittedText !== "" && editingId >= 0) {
+      editTaskFunction(editingId, edittedText);
       // localStorage.setItem("task", JSON.stringify(edittedText));
       editTask = "";
-      editIndex = -1;
     } else {
       alert("Input something!");
     }
   };
   function editTaskFunction(index, newTodoTask) {
     const tasks = JSON.parse(localStorage.getItem("task"));
-    if (tasks && index >= 0 && index < tasks.length) {
+    if (tasks && index < tasks.length) {
       tasks[index] = newTodoTask;
       localStorage.setItem("task", JSON.stringify(tasks));
     }
