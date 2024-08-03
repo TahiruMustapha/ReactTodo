@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { RiArrowDropUpFill } from "react-icons/ri";
 
 const Todo = () => {
   const [newTask, setNewTask] = useState("");
