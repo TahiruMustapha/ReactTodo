@@ -20,9 +20,7 @@
   border: none;
   outline: none;
 }
-.myTodoList {
-  /* padding: 30px 0; */
-}
+
 .todo-changeList {
   display: flex;
   align-items: center;
@@ -45,8 +43,8 @@
 .todo-changeList button:hover {
   background-color: #01204eda;
 }
-.todo-changeList button:focus{
-    outline: none;
+.todo-changeList button:focus {
+  outline: none;
 }
 .todo-addTask {
   display: flex;
@@ -70,14 +68,14 @@
 .todo-addTask button:hover {
   background-color: #01204eda;
 }
-.todo-addTask button:focus{
-    outline: none;
+.todo-addTask button:focus {
+  outline: none;
 }
 .myTodoList {
-    padding-top: 0;
+  padding-top: 0;
 }
 .taskBox {
-  display: flex;    
+  display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 4px 8px;
@@ -98,6 +96,7 @@
   gap: 6px;
   font-size: small;
 }
+
 .taskActions span:nth-child(1) {
   background-color: #8adab2b0;
   padding: 5px 10px;
@@ -105,8 +104,8 @@
   color: white;
   cursor: pointer;
 }
-.taskActions span:nth-child(1):hover{
-  background-color: #8ADAB2;
+.taskActions span:nth-child(1):hover {
+  background-color: #8adab2;
 }
 .taskActions span:nth-child(2) {
   background-color: #31363fb7;
@@ -115,8 +114,8 @@
   color: white;
   cursor: pointer;
 }
-.taskActions span:nth-child(2):hover{
-  background-color: #31363F;
+.taskActions span:nth-child(2):hover {
+  background-color: #31363f;
 }
 
 .taskActions span:nth-child(3) {
@@ -126,10 +125,53 @@
   color: white;
   cursor: pointer;
 }
-.taskActions span:nth-child(3):hover{
-  background-color: #00224D;
+.taskActions span:nth-child(3):hover {
+  background-color: #00224d;
 }
-.todoContainer{
+.todoContainer {
+  margin: 10px 0;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .taskActions span:nth-child(1) {
+    background-color: #8adab2b0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: x-small;
     
-    margin: 10px 0;
+  }
+ 
+  .taskActions span:nth-child(2) {
+    background-color: #31363fb7;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: x-small;
+  }
+  .taskActions span:nth-child(3) {
+    background-color: #00214dac;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: x-small;   
+  }
+  .myTodoList {
+    text-align: center;
+  }
+  .todo-changeList input {
+    width: 60%;
+  }
+  .todo-changeList button {
+    width: 30%;
+  }
+  .todo-addTask input {
+    width: 60%;
+  }
+  .todo-addTask button {
+   width: 30%;
+  }
 }

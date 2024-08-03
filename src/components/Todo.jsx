@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { RiArrowDropUpFill } from "react-icons/ri";
 
 const Todo = () => {
   const [newTask, setNewTask] = useState("");
   const [task, setTask] = useState([]);
   const [editTask, setEditTask] = useState("");
-  const [editTaskIndex, setEditTaskIndex] = useState(null);
+  // const [editTaskIndex, setEditTaskIndex] = useState(null);
   const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
@@ -65,11 +66,10 @@ const Todo = () => {
   };
   const updateTaskFunction = () => {
     const edittedText = editTask.trim();
-    // console.log(edittedText);
     if (edittedText !== "" && editingId >= 0) {
       editTaskFunction(editingId, edittedText);
       // localStorage.setItem("task", JSON.stringify(edittedText));
-      editTask = "";
+      // editTask = "";
     } else {
       alert("Input something!");
     }
@@ -81,14 +81,14 @@ const Todo = () => {
       localStorage.setItem("task", JSON.stringify(tasks));
     }
   }
-  // console.log(editTask);
+  
   return (
     <div className="todo">
       <div>
         <form className=" todo-changeList">
           <input type="text" onChange={handleEditTask} value={editTask} />
           <button type="default" onClick={updateTaskFunction}>
-            Change list description
+            Update
           </button>
         </form>
       </div>
@@ -100,6 +100,7 @@ const Todo = () => {
             </li>
             <p className="taskActions">
               <span onClick={() => functionToMoveTaskUp(index)}>Up</span>
+
               <span onClick={() => functionToMoveTaskDown(index)}>Down</span>
               <span onClick={() => handleDelete(index)}>Remove</span>
             </p>
