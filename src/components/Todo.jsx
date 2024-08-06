@@ -69,7 +69,7 @@ const Todo = () => {
     if (edittedText !== "" && editingId >= 0) {
       editTaskFunction(editingId, edittedText);
       // localStorage.setItem("task", JSON.stringify(edittedText));
-      editTask = "";
+      // editTask = "";
     } else {
       alert("Input something!");
     }
