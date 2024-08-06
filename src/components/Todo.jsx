@@ -89,7 +89,7 @@ const Todo = () => {
         <form className=" todo-changeList">
           <input type="text" onChange={handleEditTask} value={editTask} />
           <button onClick={updateTaskFunction} type="default">
-            Update
+            Update Task
           </button>
         </form>
       </div>
