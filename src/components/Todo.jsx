@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const Todo = () => {
   const [newTask, setNewTask] = useState("");
   const [task, setTask] = useState([]);
-  const [editTask, setEditTask] = useState("");
+  let [editTask, setEditTask] = useState("");
   // const [editTaskIndex, setEditTaskIndex] = useState(null);
   const [editingId, setEditingId] = useState(null);
 
@@ -45,7 +45,6 @@ const Todo = () => {
   const handleAddTask = (e) => {
     setNewTask(e.target.value);
   };
-  let editIndex = -1;
   const handleFormSUbmit = (e) => {
     e.preventDefault();
     if (newTask.trim() === "") return alert("Input a task!");
@@ -60,15 +59,18 @@ const Todo = () => {
 
   const handleEditTask = (e) => {
     // setEditTaskInput(e.target.value);
+    e.preventDefault();
     let value = e.target.value;
     setEditTask(value);
   };
   const updateTaskFunction = () => {
+    // e.preventDefault();
+    // console.log("clicked!")
     const edittedText = editTask.trim();
     if (edittedText !== "" && editingId >= 0) {
       editTaskFunction(editingId, edittedText);
       // localStorage.setItem("task", JSON.stringify(edittedText));
-      // editTask = "";
+      // setEditTask("");
     } else {
       alert("Input something!");
     }
@@ -80,13 +82,13 @@ const Todo = () => {
       localStorage.setItem("task", JSON.stringify(tasks));
     }
   }
-  
+
   return (
     <div className="todo">
       <div>
         <form className=" todo-changeList">
           <input type="text" onChange={handleEditTask} value={editTask} />
-          <button type="default" onClick={updateTaskFunction}>
+          <button onClick={updateTaskFunction} type="default">
             Update
           </button>
         </form>
