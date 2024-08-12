@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Actions } from "./Actions";
+import toast from "react-hot-toast";
+import { handleDeleteTask } from "../utils/helpers/DeleteTask";
+import { moveTaskUp } from "../utils/helpers/MoveTaskUp";
+import { moveTaskDown } from "../utils/helpers/MoveTaskDown";
+import { editTaskDetails } from "../utils/helpers/EditTask";
+
 const Todo = () => {
-  let storedTask = JSON.parse(localStorage.getItem("task"));
   const [newTask, setNewTask] = useState("");
   const [task, setTask] = useState([]);
+
   let [editTask, setEditTask] = useState("");
   const [editingId, setEditingId] = useState(null);
 
@@ -11,51 +18,16 @@ const Todo = () => {
     const storedTask = JSON.parse(localStorage.getItem("task")) || [];
     setTask(storedTask);
   }, []);
-  const saveTask = (updatedTask) => {
-    localStorage.setItem("task", JSON.stringify(updatedTask));
-    setTask(updatedTask);
-  };
 
-  const handleDelete = (index) => {
-    const newTask = storedTask.filter((_, taskIndex) => taskIndex !== index);
-    saveTask(newTask);
-  };
-
-  const functionToMoveTaskUp = (index) => {
-    if (storedTask) {
-      const taskIndex = storedTask.findIndex((task) => task.id === index);
-      if (taskIndex > 0) {
-        [storedTask[taskIndex - 1], storedTask[taskIndex]] = [
-          storedTask[taskIndex],
-          storedTask[taskIndex - 1],
-        ];
-        saveTask(storedTask);
-      }
-    }
-  };
-
-  const functionToMoveTaskDown = (index) => {
-    if (storedTask) {
-      const taskIndex = storedTask.findIndex((task) => task.id === index);
-      if (taskIndex < storedTask.length - 1) {
-        [storedTask[taskIndex + 1], storedTask[taskIndex]] = [
-          storedTask[taskIndex],
-          storedTask[taskIndex + 1],
-        ];
-        saveTask(storedTask);
-      }
-    }
-  };
   const handleAddTask = (e) => {
     setNewTask(e.target.value);
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (newTask.trim() === "") return alert("Input a task!");
+    if (newTask.trim() === "") return toast.error("Input a task!");
     if (newTask.trim().length > 25) {
-      return alert("Task should be brief & specific!");
+      return toast.error("Task should be brief & specific!");
     }
-
     const taskData = {
       id: uuidv4(),
       name: newTask,
@@ -63,12 +35,12 @@ const Todo = () => {
     setTask((previousTask) => [...previousTask, taskData]);
     localStorage.setItem("task", JSON.stringify([...task, taskData]));
     setNewTask("");
+    toast.success("Task added succefully!");
   };
-  const showEditTaskInfo = (id, task) => {
+  const showEditTaskInfo = ({ id, task }) => {
     setEditingId(id);
     setEditTask(task);
   };
-
   const handleEditTask = (e) => {
     e.preventDefault();
     let value = e.target.value;
@@ -78,25 +50,16 @@ const Todo = () => {
     e.preventDefault();
     const edittedText = editTask.trim();
     if (edittedText.length > 25) {
-      return alert("Task should be brief & specific!");
+      return toast.error("Task should be brief & specific!");
     }
     if (edittedText !== "" && editingId) {
-      editTaskFunction(editingId, edittedText);
+      editTaskDetails(editingId, edittedText, setTask);
+      toast.success("Task updated succefully!");
       setEditTask("");
     } else {
-      alert("Input something!");
+      toast.error("Nothing to update!");
     }
   };
-  function editTaskFunction(index, newTodoTask) {
-    if (storedTask) {
-      const taskIndex = storedTask.findIndex((task_s) => task_s.id === index);
-      if (taskIndex !== -1) {
-        storedTask[taskIndex].name = newTodoTask;
-      }
-      saveTask(storedTask);
-    }
-  }
-
   return (
     <div className="todo">
       <div>
@@ -119,18 +82,24 @@ const Todo = () => {
                 {task.name}
               </li>
               <p className="taskActions">
-                <span onClick={() => functionToMoveTaskUp(task.id)}>Up</span>
-
-                <span onClick={() => functionToMoveTaskDown(task.id)}>
-                  Down
+                <span onClick={() => moveTaskUp(task.id, setTask)}>
+                  {" "}
+                  <Actions>Up</Actions>{" "}
                 </span>
-                <span onClick={() => handleDelete(index)}>Remove</span>
+
+                <span onClick={() => moveTaskDown(task.id, setTask)}>
+                  <Actions>Down</Actions>{" "}
+                </span>
+                <span onClick={() => handleDeleteTask(index, setTask)}>
+                  {" "}
+                  <Actions>Remove</Actions>{" "}
+                </span>
               </p>
             </div>
           ))}
         </div>
       ) : (
-        <p>Zero task today!</p>
+        <p className="noTask">Zero task today!</p>
       )}
 
       <div>

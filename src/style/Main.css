@@ -89,7 +89,7 @@
   list-style: none;
   cursor: pointer;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.536);
+  color: rgba(0, 0, 0, 0.777);
 }
 .taskActions {
   display: flex;
@@ -131,7 +131,23 @@
 .todoContainer {
   margin: 10px 0;
 }
-
+.removeBtn {
+  background: none;
+  padding: 3px 3px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+.removeBtn:hover {
+  border: none;
+  outline: none;
+  /* background-color: #00224d; */
+}
+.removeBtn:focus {
+  outline: none;
+  border: none;
+}
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .taskActions span:nth-child(1) {
@@ -140,9 +156,8 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: x-small;
-    
   }
- 
+
   .taskActions span:nth-child(2) {
     background-color: #31363fb7;
     padding: 5px 10px;
@@ -157,7 +172,7 @@
     border-radius: 5px;
     color: white;
     cursor: pointer;
-    font-size: x-small;   
+    font-size: x-small;
   }
   .myTodoList {
     text-align: center;
@@ -172,6 +187,10 @@
     width: 60%;
   }
   .todo-addTask button {
-   width: 30%;
+    width: 30%;
   }
+}
+.noTask {
+  color: white;
+  font-weight: 500;
 }
