@@ -2,29 +2,28 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Actions } from "./Actions";
 import toast from "react-hot-toast";
-import { handleDeleteTask } from "../utils/helpers/DeleteTask";
-import { moveTaskUp } from "../utils/helpers/MoveTaskUp";
-import { moveTaskDown } from "../utils/helpers/MoveTaskDown";
-import { editTaskDetails } from "../utils/helpers/EditTask";
 import InputTask from "./InputTask";
+import { useRef } from "react";
+import {
+  editTaskDetails,
+  handleDeleteTask,
+  moveTaskDown,
+  moveTaskUp,
+} from "../utils/helpers/helper";
 
 const Todo = () => {
-  const [newTask, setNewTask] = useState("");
   const [task, setTask] = useState([]);
-
   let [editTask, setEditTask] = useState("");
-  const [editingId, setEditingId] = useState(null);
-
+  const editTaskRef = useRef("");
+  const taskId = useRef("");
   useEffect(() => {
     const storedTask = JSON.parse(localStorage.getItem("task")) || [];
     setTask(storedTask);
   }, []);
-
-  const handleAddTask = (e) => {
-    setNewTask(e.target.value);
-  };
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    let newTask = formData.get("addTask");
     if (newTask.trim() === "") return toast.error("Input a task!");
     if (newTask.trim().length > 25) {
       return toast.error("Task should be brief & specific!");
@@ -35,26 +34,28 @@ const Todo = () => {
     };
     setTask((previousTask) => [...previousTask, taskData]);
     localStorage.setItem("task", JSON.stringify([...task, taskData]));
-    setNewTask("");
+    e.currentTarget.reset();
     toast.success("Task added succefully!");
   };
-  const showEditTaskInfo = ({ id, task }) => {
-    setEditingId(id);
+  const showEditTaskInfo = (id, task) => {
     setEditTask(task);
+    taskId.current = id;
+    editTaskRef.current = task;
   };
   const handleEditTask = (e) => {
     e.preventDefault();
-    let value = e.target.value;
-    setEditTask(value);
+    editTaskRef.current = e.target.value;
+    setEditTask(editTaskRef.current);
   };
   const updateTaskFunction = (e) => {
     e.preventDefault();
-    const edittedText = editTask.trim();
+
+    const edittedText = editTaskRef.current.trim();
     if (edittedText.length > 25) {
       return toast.error("Task should be brief & specific!");
     }
-    if (edittedText !== "" && editingId) {
-      editTaskDetails(editingId, edittedText, setTask);
+    if (edittedText !== "" && taskId.current) {
+      editTaskDetails(taskId.current, edittedText, setTask);
       toast.success("Task updated succefully!");
       setEditTask("");
     } else {
@@ -64,13 +65,14 @@ const Todo = () => {
   return (
     <div className="todo">
       <div>
-        <form className=" todo-changeList">
-          {/* <InputTask value = {editTask} onChange={handleEditTask} /> */}
-          <input type="text" onChange={handleEditTask} value={editTask} />
-          <button onClick={updateTaskFunction} type="default">
-            Update Task
-          </button>
-        </form>
+        <InputTask
+          inputName={"editTask"}
+          onSubmit={updateTaskFunction}
+          inputValue={editTask}
+          onChangeText={handleEditTask}
+          buttonText={"Update Task"}
+          placeholderText={""}
+        />
       </div>
       {task.length >= 1 ? (
         <div className="todoContainer">
@@ -85,16 +87,14 @@ const Todo = () => {
               </li>
               <p className="taskActions">
                 <span onClick={() => moveTaskUp(task.id, setTask)}>
-                  {" "}
-                  <Actions>Up</Actions>{" "}
+                  <Actions>Up</Actions>
                 </span>
 
                 <span onClick={() => moveTaskDown(task.id, setTask)}>
-                  <Actions>Down</Actions>{" "}
+                  <Actions>Down</Actions>
                 </span>
                 <span onClick={() => handleDeleteTask(index, setTask)}>
-                  {" "}
-                  <Actions>Remove</Actions>{" "}
+                  <Actions>Remove</Actions>
                 </span>
               </p>
             </div>
@@ -103,17 +103,15 @@ const Todo = () => {
       ) : (
         <p className="noTask">Zero task today!</p>
       )}
-
       <div>
-        <form onSubmit={handleFormSubmit} className="todo-addTask">
-          <input
-            type="text"
-            onChange={handleAddTask}
-            value={newTask}
-            placeholder=" Write task"
-          />
-          <button type="submit">Add Item</button>
-        </form>
+        <InputTask
+          inputName={"addTask"}
+          onSubmit={handleFormSubmit}
+          // inputValue={editTask}
+          // onChangeText={handleEditTask}
+          buttonText={"Add Task"}
+          placeholderText={" Write task"}
+        />
       </div>
     </div>
   );
