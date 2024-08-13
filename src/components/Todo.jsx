@@ -6,6 +6,7 @@ import { handleDeleteTask } from "../utils/helpers/DeleteTask";
 import { moveTaskUp } from "../utils/helpers/MoveTaskUp";
 import { moveTaskDown } from "../utils/helpers/MoveTaskDown";
 import { editTaskDetails } from "../utils/helpers/EditTask";
+import InputTask from "./InputTask";
 
 const Todo = () => {
   const [newTask, setNewTask] = useState("");
@@ -64,6 +65,7 @@ const Todo = () => {
     <div className="todo">
       <div>
         <form className=" todo-changeList">
+          {/* <InputTask value = {editTask} onChange={handleEditTask} /> */}
           <input type="text" onChange={handleEditTask} value={editTask} />
           <button onClick={updateTaskFunction} type="default">
             Update Task
