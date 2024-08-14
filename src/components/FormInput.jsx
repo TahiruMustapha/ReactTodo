@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-
-const InputTask = ({
+import React from "react";
+// import toast from "react-hot-toast";
+// import { v4 as uuidv4 } from "uuid";
+const FormInput = ({
   onSubmit,
   inputValue,
   onChangeText,
@@ -22,4 +23,4 @@ const InputTask = ({
   );
 };
 
-export default InputTask;
+export default FormInput;

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 export const moveTaskDown = (taskId, setTask) => {
-  let storedTask = JSON.parse(localStorage.getItem("task"));
+  let storedTask = getTask();
   if (storedTask) {
     const taskIndex = storedTask.findIndex((task) => task.id === taskId);
     if (taskIndex < storedTask.length - 1) {
@@ -15,7 +15,7 @@ export const moveTaskDown = (taskId, setTask) => {
 };
 
 export const moveTaskUp = (index, setTask) => {
-  let storedTask = JSON.parse(localStorage.getItem("task"));
+  let storedTask = getTask();
 
   if (storedTask) {
     const taskIndex = storedTask.findIndex((task) => task.id === index);
@@ -33,9 +33,13 @@ export const moveTaskUp = (index, setTask) => {
 export const saveTask = (updatedTask) => {
   localStorage.setItem("task", JSON.stringify(updatedTask));
 };
+export const getTask = () => {
+  const storedTask = JSON.parse(localStorage.getItem("task")) || [];
+  return storedTask;
+};
 
 export const handleDeleteTask = (index, setTask) => {
-  let storedTask = JSON.parse(localStorage.getItem("task"));
+  let storedTask = getTask();
   const confirmTaskRemoval = window.confirm(
     "Are you sure you want to remove this task?"
   );
@@ -48,7 +52,7 @@ export const handleDeleteTask = (index, setTask) => {
 };
 
 export const editTaskDetails = (index, newTodoTask, setTask) => {
-  let storedTask = JSON.parse(localStorage.getItem("task"));
+  let storedTask = getTask();
 
   if (storedTask) {
     const taskIndex = storedTask.findIndex((task_s) => task_s.id === index);
