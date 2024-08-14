@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Actions } from "./Actions";
 import toast from "react-hot-toast";
-import InputTask from "./InputTask";
-import { useRef } from "react";
+import FormInput from "./FormInput";
 import {
   editTaskDetails,
   handleDeleteTask,
   moveTaskDown,
   moveTaskUp,
-} from "../utils/helpers/helper";
+} from "../utils/helper";
 
 const Todo = () => {
   const [task, setTask] = useState([]);
   let [editTask, setEditTask] = useState("");
-  const editTaskRef = useRef("");
+  const [editingId, setEditingId] = useState(null);
   const taskId = useRef("");
+  const editTaskRef = useRef();
   useEffect(() => {
     const storedTask = JSON.parse(localStorage.getItem("task")) || [];
     setTask(storedTask);
   }, []);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -38,6 +39,7 @@ const Todo = () => {
     toast.success("Task added succefully!");
   };
   const showEditTaskInfo = (id, task) => {
+    // setEditingId(id);
     setEditTask(task);
     taskId.current = id;
     editTaskRef.current = task;
@@ -49,7 +51,6 @@ const Todo = () => {
   };
   const updateTaskFunction = (e) => {
     e.preventDefault();
-
     const edittedText = editTaskRef.current.trim();
     if (edittedText.length > 25) {
       return toast.error("Task should be brief & specific!");
@@ -65,7 +66,7 @@ const Todo = () => {
   return (
     <div className="todo">
       <div>
-        <InputTask
+        <FormInput
           inputName={"editTask"}
           onSubmit={updateTaskFunction}
           inputValue={editTask}
@@ -87,14 +88,16 @@ const Todo = () => {
               </li>
               <p className="taskActions">
                 <span onClick={() => moveTaskUp(task.id, setTask)}>
-                  <Actions>Up</Actions>
+                  {" "}
+                  <Actions>Up</Actions>{" "}
                 </span>
 
                 <span onClick={() => moveTaskDown(task.id, setTask)}>
-                  <Actions>Down</Actions>
+                  <Actions>Down</Actions>{" "}
                 </span>
                 <span onClick={() => handleDeleteTask(index, setTask)}>
-                  <Actions>Remove</Actions>
+                  {" "}
+                  <Actions>Remove</Actions>{" "}
                 </span>
               </p>
             </div>
@@ -103,14 +106,13 @@ const Todo = () => {
       ) : (
         <p className="noTask">Zero task today!</p>
       )}
+
       <div>
-        <InputTask
+        <FormInput
           inputName={"addTask"}
           onSubmit={handleFormSubmit}
-          // inputValue={editTask}
-          // onChangeText={handleEditTask}
-          buttonText={"Add Task"}
-          placeholderText={" Write task"}
+          buttonText={"Add Item"}
+          placeholderText={"Write task"}
         />
       </div>
     </div>
