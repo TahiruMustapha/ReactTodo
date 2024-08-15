@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import FormInput from "./FormInput";
-import { editTaskDetails, getTask } from "../utils/helper";
+import { editTaskDetails, getTask, saveTask } from "../utils/helper";
 import { TaskBox } from "./TaskBox";
-const Todo = () => {  
+const Todo = () => {
   const [task, setTask] = useState([]);
   let [editTask, setEditTask] = useState("");
   const taskId = useRef("");
@@ -12,7 +12,7 @@ const Todo = () => {
     const storedTask = getTask();
     setTask(storedTask);
   }, []);
-  const addOrUpdateTask = (e) => {
+  const handleForm = (e) => {
     e.preventDefault();
     const edittedText = editTask.trim();
     if (edittedText.length > 25) {
@@ -33,7 +33,7 @@ const Todo = () => {
         name: editTask,
       };
       setTask((previousTask) => [...previousTask, taskData]);
-      localStorage.setItem("task", JSON.stringify([...task, taskData]));
+      saveTask([...task, taskData]);
       setEditTask("");
       toast.success("Task added succefully!");
     }
@@ -53,7 +53,7 @@ const Todo = () => {
           inputValue={editTask}
           onChangeText={handleEditTask}
           inputName={"task"}
-          onSubmit={addOrUpdateTask}
+          onSubmit={handleForm}
           buttonText={taskId.current ? "Update task" : "Add task"}
           placeholderText={"Write task"}
         />

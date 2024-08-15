@@ -50,10 +50,8 @@ export const handleDeleteTask = (index, setTask) => {
     toast.success("Task removed succefully!");
   }
 };
-
 export const editTaskDetails = (index, newTodoTask, setTask) => {
   let storedTask = getTask();
-
   if (storedTask) {
     const taskIndex = storedTask.findIndex((task_s) => task_s.id === index);
     if (taskIndex !== -1) {

@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import "../style/Main.css";
 import Header from "./Header";
-import Hidelist from "./Hidelist";
-import TodoContent from "./TodoContent";
 import Todo from "./Todo";
-
 const Main = () => {
   const [hideList, setHideList] = useState(true);
   return (
@@ -31,5 +28,4 @@ const Main = () => {
     </div>
   );
 };
-
 export default Main;

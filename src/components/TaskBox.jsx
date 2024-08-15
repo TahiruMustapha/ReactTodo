@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Actions } from "./Actions";
-import { handleDeleteTask, moveTaskDown, moveTaskUp } from "../utils/helper";
-
 export const TaskBox = ({ taskes, setTask, showEditTaskInfo }) => {
   return (
     <div>
@@ -14,20 +12,7 @@ export const TaskBox = ({ taskes, setTask, showEditTaskInfo }) => {
           >
             {task.name}
           </li>
-          <p className="taskActions">
-            <span onClick={() => moveTaskUp(task.id, setTask)}>
-              {" "}
-              <Actions>Up</Actions>{" "}
-            </span>
-
-            <span onClick={() => moveTaskDown(task.id, setTask)}>
-              <Actions>Down</Actions>{" "}
-            </span>
-            <span onClick={() => handleDeleteTask(index, setTask)}>
-              {" "}
-              <Actions>Remove</Actions>{" "}
-            </span>
-          </p>
+          <Actions setTask={setTask} taskId = {task.id} index = {index} />
         </div>
       ))}
     </div>
