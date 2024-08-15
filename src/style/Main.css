@@ -7,6 +7,9 @@
   border-top: 1px solid white;
   border-bottom: 1px solid white;
 }
+.todoFormBox{
+  margin-top: 10px;
+}
 .hidelistBtn {
   background-color: #01204e89;
   color: white;

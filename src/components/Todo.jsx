@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import FormInput from "./FormInput";
 import { editTaskDetails, getTask } from "../utils/helper";
 import { TaskBox } from "./TaskBox";
-const Todo = () => {
+const Todo = () => {  
   const [task, setTask] = useState([]);
   let [editTask, setEditTask] = useState("");
   const taskId = useRef("");
@@ -12,12 +12,12 @@ const Todo = () => {
     const storedTask = getTask();
     setTask(storedTask);
   }, []);
-  const AddOrUpdateTak = (e) => {
+  const addOrUpdateTask = (e) => {
+    e.preventDefault();
     const edittedText = editTask.trim();
     if (edittedText.length > 25) {
       return toast.error("Task should be brief & specific!");
     }
-    e.preventDefault();
     if (taskId.current) {
       if (edittedText !== "" && taskId.current) {
         editTaskDetails(taskId.current, edittedText, setTask);
@@ -48,6 +48,16 @@ const Todo = () => {
   };
   return (
     <div className="todo">
+      <div className="todoFormBox">
+        <FormInput
+          inputValue={editTask}
+          onChangeText={handleEditTask}
+          inputName={"task"}
+          onSubmit={addOrUpdateTask}
+          buttonText={taskId.current ? "Update task" : "Add task"}
+          placeholderText={"Write task"}
+        />
+      </div>
       {task.length >= 1 ? (
         <div className="todoContainer">
           <TaskBox
@@ -59,16 +69,6 @@ const Todo = () => {
       ) : (
         <p className="noTask">Zero task today!</p>
       )}
-      <div>
-        <FormInput
-          inputValue={editTask}
-          onChangeText={handleEditTask}
-          inputName={"addTask"}
-          onSubmit={AddOrUpdateTak}
-          buttonText={taskId.current ? "update task" : "Add task"}
-          placeholderText={"Write task"}
-        />
-      </div>
     </div>
   );
 };

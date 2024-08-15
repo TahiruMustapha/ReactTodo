@@ -1,6 +1,4 @@
 import React from "react";
-// import toast from "react-hot-toast";
-// import { v4 as uuidv4 } from "uuid";
 const FormInput = ({
   onSubmit,
   inputValue,
@@ -22,5 +20,4 @@ const FormInput = ({
     </form>
   );
 };
-
 export default FormInput;
