@@ -28,14 +28,18 @@ const Todo = () => {
         toast.error("Nothing to update!");
       }
     } else {
-      const taskData = {
-        id: uuidv4(),
-        name: editTask,
-      };
-      setTask((previousTask) => [...previousTask, taskData]);
-      saveTask([...task, taskData]);
-      setEditTask("");
-      toast.success("Task added succefully!");
+      if (editTask) {
+        const taskData = {
+          id: uuidv4(),
+          name: editTask,
+        };
+        setTask((previousTask) => [...previousTask, taskData]);
+        saveTask([...task, taskData]);
+        setEditTask("");
+        toast.success("Task added succefully!");
+      } else {
+        toast.error("Input a task!");
+      }
     }
   };
   const showEditTaskInfo = (id, task) => {
