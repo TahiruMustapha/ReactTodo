@@ -8,6 +8,7 @@ export const TaskBox = ({ taskes, setTask, showEditTaskInfo }) => {
           <li
             key={task.id}
             onClick={() => showEditTaskInfo(task.id, task.name)}
+       
             className="task"
           >
             {task.name}

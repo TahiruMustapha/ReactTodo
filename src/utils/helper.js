@@ -29,7 +29,6 @@ export const moveTaskUp = (index, setTask) => {
     }
   }
 };
-
 export const saveTask = (updatedTask) => {
   localStorage.setItem("task", JSON.stringify(updatedTask));
 };
@@ -37,7 +36,6 @@ export const getTask = () => {
   const storedTask = JSON.parse(localStorage.getItem("task")) || [];
   return storedTask;
 };
-
 export const handleDeleteTask = (index, setTask) => {
   let storedTask = getTask();
   const confirmTaskRemoval = window.confirm(
@@ -61,3 +59,6 @@ export const editTaskDetails = (index, newTodoTask, setTask) => {
     setTask(storedTask);
   }
 };
+// export const showEditTaskInfo = (id,task)=>{
+  
+// }
