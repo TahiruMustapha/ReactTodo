@@ -59,6 +59,4 @@ export const editTaskDetails = (index, newTodoTask, setTask) => {
     setTask(storedTask);
   }
 };
-// export const showEditTaskInfo = (id,task)=>{
-  
-// }
+
