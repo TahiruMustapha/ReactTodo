@@ -11,7 +11,7 @@ const FormInput = ( ) => {
     const storedTask = getTask();
     setTask(storedTask);
   }, []);
-  const handleForm = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     const edittedText = editTask.trim();
     if (edittedText.length > 25) {
@@ -51,7 +51,7 @@ const showEditTaskInfo = (id, task) => {
   };
   return (
     <>
-     <form onSubmit={handleForm} className=" todo-changeList">
+     <form onSubmit={handleFormSubmit} className=" todo-changeList">
       <input
         type="text"
         name="task"
