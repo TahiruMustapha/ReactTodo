@@ -41,7 +41,7 @@ const FormInput = ( ) => {
       }
     }
   };
-const showTaskToBeEditted = (id, task) => {
+const showEditTaskInfo = (id, task) => {
     setEditTask(task);
     taskId.current = id;
   };
@@ -66,7 +66,7 @@ const showTaskToBeEditted = (id, task) => {
           <TaskBox
             taskes={task}
             setTask={setTask}
-            showEditTaskInfo={showTaskToBeEditted}
+            showEditTaskInfo={showEditTaskInfo}
           />
         </div>
       ) : (
