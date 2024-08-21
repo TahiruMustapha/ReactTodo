@@ -11,7 +11,7 @@ const FormInput = ( ) => {
     const storedTask = getTask();
     setTask(storedTask);
   }, []);
-  const handleForm = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     const edittedText = editTask.trim();
     if (edittedText.length > 25) {
