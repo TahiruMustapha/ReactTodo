@@ -51,7 +51,7 @@ const showEditTaskInfo = (id, task) => {
   };
   return (
     <>
-     <form onSubmit={handleForm} className=" todo-changeList">
+     <form onSubmit={handleFormSubmit} className=" todo-changeList">
       <input
         type="text"
         name="task"
