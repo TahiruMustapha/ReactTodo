@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-export const moveTaskDown = (taskId, setTask) => {
+export const moveTaskDown = (taskId, setTask, setOpenActionId) => {
   let storedTask = getTask();
   if (storedTask) {
     const taskIndex = storedTask.findIndex((task) => task.id === taskId);
@@ -12,9 +12,10 @@ export const moveTaskDown = (taskId, setTask) => {
       setTask(storedTask);
     }
   }
+  setOpenActionId(null);
 };
 
-export const moveTaskUp = (index, setTask) => {
+export const moveTaskUp = (index, setTask, setOpenActionId) => {
   let storedTask = getTask();
 
   if (storedTask) {
@@ -28,6 +29,11 @@ export const moveTaskUp = (index, setTask) => {
       setTask(storedTask);
     }
   }
+  setOpenActionId(null);
+};
+export const closeModals = (setOpenDeleteDialog,setOpenActionId) => {
+  setOpenDeleteDialog(false);
+  setOpenActionId(null);
 };
 export const saveTask = (updatedTask) => {
   localStorage.setItem("task", JSON.stringify(updatedTask));
@@ -38,15 +44,10 @@ export const getTask = () => {
 };
 export const handleDeleteTask = (index, setTask) => {
   let storedTask = getTask();
-  const confirmTaskRemoval = window.confirm(
-    "Are you sure you want to remove this task?"
-  );
-  if (confirmTaskRemoval) {
-    const newTask = storedTask.filter((_, taskIndex) => taskIndex !== index);
-    saveTask(newTask);
-    setTask(newTask);
-    toast.success("Task removed succefully!");
-  }
+  const newTask = storedTask.filter((_, taskIndex) => taskIndex !== index);
+  saveTask(newTask);
+  setTask(newTask);
+  toast.success("Task removed succefully!");
 };
 export const editTaskDetails = (index, newTodoTask, setTask) => {
   let storedTask = getTask();
@@ -59,4 +60,3 @@ export const editTaskDetails = (index, newTodoTask, setTask) => {
     setTask(storedTask);
   }
 };
-
