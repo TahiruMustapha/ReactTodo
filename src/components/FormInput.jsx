@@ -1,23 +1,22 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { editTaskDetails, getTask, saveTask } from "../utils/helper";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import { TaskBox } from "./TaskBox";
-import { useFormStatus } from "react-dom";
 const FormInput = () => {
   const [task, setTask] = useState([]);
-  let [editTask, setEditTask] = useState("");
+  const [getTaskId, setGetTaskId] = useState(null);
   const taskId = useRef("");
-  const inputRef = useRef("");
+  const inputRef = useRef(null);
   useEffect(() => {
     const storedTask = getTask();
     setTask(storedTask);
   }, []);
+  let newId = "";
   const handleFormSubmit = (e) => {
     e.preventDefault();
-  
-
-    const edittedText = inputRef.current.trim();
+    const edittedText = inputRef.current.value.trim();
     if (edittedText.length > 25) {
       return toast.error("Task should be brief & specific!");
     }
@@ -25,20 +24,20 @@ const FormInput = () => {
       if (edittedText !== "" && taskId.current) {
         editTaskDetails(taskId.current, edittedText, setTask);
         toast.success("Task updated succefully!");
-        inputRef.current = "";
+        inputRef.current.value = "";
         taskId.current = "";
       } else {
         toast.error("Nothing to update!");
       }
     } else {
-      if (inputRef.current) {
+      if (inputRef.current.value) {
         const taskData = {
           id: uuidv4(),
-          name: inputRef.current,
+          name: inputRef.current.value,
         };
         setTask((previousTask) => [...previousTask, taskData]);
         saveTask([...task, taskData]);
-        inputRef.current = "";
+        inputRef.current.value = "";
         toast.success("Task added succefully!");
       } else {
         toast.error("Input a task!");
@@ -46,24 +45,17 @@ const FormInput = () => {
     }
   };
   const showEditTaskInfo = (id, task) => {
-    setEditTask(task);
     taskId.current = id;
-    inputRef.current = task;
+    // setGetTaskId(id);
+    inputRef.current.value = task;
   };
-  const handleEditTask = (e) => {
-    e.preventDefault();
-    setEditTask(e.target.value);
-    inputRef.current = e.target.value;
-  };
-
   return (
     <>
       <form onSubmit={handleFormSubmit} className=" todo-changeList">
         <input
           type="text"
           name="task"
-          value={inputRef.current}
-          onChange={handleEditTask}
+          ref={inputRef}
           placeholder={taskId.current ? "" : "Add task here"}
         />
         <button type="submit">
