@@ -6,14 +6,12 @@ import toast from "react-hot-toast";
 import { TaskBox } from "./TaskBox";
 const FormInput = () => {
   const [task, setTask] = useState([]);
-  const [getTaskId, setGetTaskId] = useState(null);
   const taskId = useRef("");
   const inputRef = useRef(null);
   useEffect(() => {
     const storedTask = getTask();
     setTask(storedTask);
   }, []);
-  let newId = "";
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const edittedText = inputRef.current.value.trim();
@@ -46,7 +44,6 @@ const FormInput = () => {
   };
   const showEditTaskInfo = (id, task) => {
     taskId.current = id;
-    // setGetTaskId(id);
     inputRef.current.value = task;
   };
   return (
