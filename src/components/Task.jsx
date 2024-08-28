@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ActionsMenu from "./ActionsMenu";
 import { HiDotsVertical } from "react-icons/hi";
 const Task = ({ task, setTask, showEditTaskInfo, index }) => {

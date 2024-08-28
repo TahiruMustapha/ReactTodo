@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../style/Main.css";
 import Header from "./Header";
 import Todo from "./Todo";
@@ -10,13 +10,11 @@ const Main = () => {
       <div className=" hidelist">
         {hideList ? (
           <button onClick={() => setHideList(false)} className=" hidelistBtn">
-            {" "}
-            Hide List{" "}
+            Hide List
           </button>
         ) : (
           <button onClick={() => setHideList(true)} className=" hidelistBtn">
-            {" "}
-            Show List{" "}
+            Show List
           </button>
         )}
       </div>

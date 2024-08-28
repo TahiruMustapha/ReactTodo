@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { moveTaskDown, moveTaskUp } from "../utils/helper";
 import { FaCaretDown, FaCaretUp, FaTrashAlt } from "react-icons/fa";
 import ConfirmDelete from "./ConfirmDelete";
@@ -16,7 +16,7 @@ const ActionsMenu = ({
         onClick={() => {
           moveTaskUp(taskId, setTask, setOpenActionId);
         }}
-        className="removeBtn"
+        className="actionBtn"
       >
         Up
         <span>
@@ -27,7 +27,7 @@ const ActionsMenu = ({
         onClick={() => {
           moveTaskDown(taskId, setTask, setOpenActionId);
         }}
-        className="removeBtn"
+        className="actionBtn"
       >
         Down
         <span>
@@ -42,7 +42,7 @@ const ActionsMenu = ({
           setOpenActionId={setOpenActionId}
         />
       )}
-      <p onClick={() => setOpenDeleteDialog(true)} className="removeBtn">
+      <p onClick={() => setOpenDeleteDialog(true)} className="actionBtn">
         Remove
         <span>
           <FaTrashAlt className=" del" />

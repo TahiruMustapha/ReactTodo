@@ -1,17 +1,7 @@
-
-import React, { useEffect, useRef, useState } from "react";
-import { editTaskDetails, getTask, saveTask } from "../utils/helper";
+import { editTaskDetails, saveTask } from "../utils/helper";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
-import { TaskBox } from "./TaskBox";
-const FormInput = () => {
-  const [task, setTask] = useState([]);
-  const taskId = useRef("");
-  const inputRef = useRef(null);
-  useEffect(() => {
-    const storedTask = getTask();
-    setTask(storedTask);
-  }, []);
+const FormInput = ({ taskId, inputRef, setTask, task }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const edittedText = inputRef.current.value.trim();
@@ -42,12 +32,7 @@ const FormInput = () => {
       }
     }
   };
-  const showEditTaskInfo = (id, task) => {
-    taskId.current = id;
-    inputRef.current.value = task;
-  };
   return (
-    <>
       <form onSubmit={handleFormSubmit} className=" todo-changeList">
         <input
           type="text"
@@ -59,18 +44,6 @@ const FormInput = () => {
           {taskId.current ? "Update task" : "Add task"}
         </button>
       </form>
-      {task.length >= 1 ? (
-        <div className="todoContainer">
-          <TaskBox
-            taskes={task}
-            setTask={setTask}
-            showEditTaskInfo={showEditTaskInfo}
-          />
-        </div>
-      ) : (
-        <p className="noTask">Zero task today!</p>
-      )}
-    </>
   );
 };
 export default FormInput;

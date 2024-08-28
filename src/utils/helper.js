@@ -1,4 +1,6 @@
 import toast from "react-hot-toast";
+import { v4 as uuidv4 } from "uuid";
+
 export const moveTaskDown = (taskId, setTask, setOpenActionId) => {
   let storedTask = getTask();
   if (storedTask) {
@@ -31,17 +33,30 @@ export const moveTaskUp = (index, setTask, setOpenActionId) => {
   }
   setOpenActionId(null);
 };
-export const closeModals = (setOpenDeleteDialog,setOpenActionId) => {
+export const closeModals = (setOpenDeleteDialog, setOpenActionId) => {
   setOpenDeleteDialog(false);
   setOpenActionId(null);
 };
-export const saveTask = (updatedTask) => {
-  localStorage.setItem("task", JSON.stringify(updatedTask));
+export const saveTask = (updatedTask, key = "task") => {
+  localStorage.setItem(key, JSON.stringify(updatedTask));
 };
-export const getTask = () => {
-  const storedTask = JSON.parse(localStorage.getItem("task")) || [];
+
+export const getTask = (key = "task") => {
+  const storedTask = JSON.parse(localStorage.getItem(key)) || [];
   return storedTask;
 };
+//receive name and save to storage
+export const saveSingleTask = (singleTask) => {
+  const storedTask = getTask();
+  const task = {
+    id: uuidv4(),
+    name: singleTask,
+  };
+  storedTask.push(task);
+
+  saveTask(storedTask);
+};
+
 export const handleDeleteTask = (index, setTask) => {
   let storedTask = getTask();
   const newTask = storedTask.filter((_, taskIndex) => taskIndex !== index);
