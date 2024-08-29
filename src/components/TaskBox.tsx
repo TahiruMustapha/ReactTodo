@@ -1,5 +1,14 @@
 import Task from "./Task";
-export const TaskBox = ({ taskes, setTask, showEditTaskInfo }) => {
+interface Tasks {
+  id: string;
+  name: string;
+}
+interface FormInputProps {
+  taskes: Tasks[];
+  setTask: React.Dispatch<React.SetStateAction<Tasks[]>>;
+  showEditTaskInfo: (id: string, task: string) => void;
+}
+export const TaskBox:React.FC<FormInputProps> = ({ taskes, setTask, showEditTaskInfo }) => {
   return (
     <div>
       {taskes.map((task, index) => (

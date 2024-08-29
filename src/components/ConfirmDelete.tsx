@@ -1,6 +1,17 @@
 import { IoClose } from "react-icons/io5";
 import { closeModals, handleDeleteTask } from "../utils/helper";
-const ConfirmDelete = ({
+import { Dispatch, SetStateAction } from "react";
+interface Task {
+  id: string;
+  name: string;
+}
+interface ComfirmTypes {
+  setTask :Dispatch<SetStateAction<Task[]>>;
+  taskId:number;
+  setOpenDeleteDialog:React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenActionId:Dispatch<SetStateAction<string | null>>
+}
+const ConfirmDelete:React.FC<ComfirmTypes> = ({
   setTask,
   taskId,
   setOpenDeleteDialog,

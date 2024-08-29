@@ -1,16 +1,33 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ActionsMenu from "./ActionsMenu";
 import { HiDotsVertical } from "react-icons/hi";
-const Task = ({ task, setTask, showEditTaskInfo, index }) => {
-  const [openActionId, setOpenActionId] = useState(null);
-  const actionRefs = useRef({});
-  const showActions = (id) => {
+
+interface Task {
+  id: string;
+  name: string;
+}
+interface FormInputProps {
+  task: Task;
+  setTask: React.Dispatch<React.SetStateAction<Task[]>>;
+  showEditTaskInfo: (id: string, task: string) => void;
+  index: number;
+}
+
+const Task: React.FC<FormInputProps> = ({
+  task,
+  setTask,
+  showEditTaskInfo,
+  index,
+}) => {
+  const [openActionId, setOpenActionId] = useState<string | null>(null);
+  const actionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const showActions = (id: string) => {
     setOpenActionId((prevId) => (prevId === id ? null : id));
   };
   useEffect(() => {
-    const handler = (e) => {
+    const handler = (e: MouseEvent) => {
       Object.values(actionRefs.current).forEach((ref) => {
-        if (ref && !ref.contains(e.target)) {
+        if (ref && !ref.contains(e.target as Node)) {
           setOpenActionId(null);
         }
       });
@@ -35,7 +52,7 @@ const Task = ({ task, setTask, showEditTaskInfo, index }) => {
           setTask={setTask}
           taskId={task.id}
           index={index}
-          actionRef={(ref) => (actionRefs.current[task._id] = ref)}
+          actionRef={(ref) => (actionRefs.current[task.id] = ref)}
         />
       )}
       <HiDotsVertical

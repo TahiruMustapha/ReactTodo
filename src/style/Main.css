@@ -9,6 +9,7 @@
 }
 .todoFormBox {
   margin-top: 10px;
+  
 }
 .hidelistBtn {
   background-color: #01204e89;
@@ -27,6 +28,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  
 }
 .todo-changeList input {
   border: none;
@@ -52,6 +54,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  
 }
 .todo-addTask input {
   border: none;
@@ -75,13 +78,17 @@
 }
 .myTodoList {
   padding-top: 0;
+  
 }
 .taskBox {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 4px 8px;
-  height: 2.5rem;
+  height: 2rem;
+  /* background-color: rebeccapurple; */
+  margin: 10px 0;
+  
 }
 .taskBox:hover {
   background-color: rgba(128, 128, 128, 0.237);
@@ -92,6 +99,7 @@
   cursor: pointer;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.777);
+  
 }
 .taskActions {
   background-color: rebeccapurple;
@@ -136,6 +144,7 @@
 }
 .todoContainer {
   margin: 10px 0;
+  
 }
 .actionBtn {
   display: flex;
@@ -236,7 +245,7 @@
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
-  padding: 4px 4px;
+  padding: 8px 4px;
 }
 .confirmDeleteHeader {
   margin-top: 1rem;

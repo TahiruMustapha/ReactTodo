@@ -1,6 +1,5 @@
-import React from 'react'
 import '../style/Header.css'
-const Header = () => {
+const Header:React.FC = () => {
   return (
     <div className='header'>
       <h2>JavaScript and the DOM</h2>

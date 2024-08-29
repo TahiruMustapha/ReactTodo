@@ -1,8 +1,17 @@
 import { useState } from "react";
 import { moveTaskDown, moveTaskUp } from "../utils/helper";
 import { FaCaretDown, FaCaretUp, FaTrashAlt } from "react-icons/fa";
+import Actions from "./Actions";
 import ConfirmDelete from "./ConfirmDelete";
-const ActionsMenu = ({
+import Task from "./Task";
+interface ActionsMenuProps {
+  setOpenActionId: React.Dispatch<React.SetStateAction<string | null>>;
+  setTask: React.Dispatch<React.SetStateAction<Task[]>>;
+  taskId: string;
+  index: number;
+  actionRef: (ref: HTMLDivElement | null) => void;
+}
+const ActionsMenu:React.FC<ActionsMenuProps>= ({
   actionRef,
   setTask,
   taskId,
@@ -12,28 +21,24 @@ const ActionsMenu = ({
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   return (
     <div ref={actionRef} className="actionMenuBox">
-      <p
+      <Actions
         onClick={() => {
           moveTaskUp(taskId, setTask, setOpenActionId);
         }}
         className="actionBtn"
       >
         Up
-        <span>
-          <FaCaretUp className=" up" />
-        </span>
-      </p>
-      <p
+        <FaCaretUp className=" up" />
+      </Actions>
+      <Actions
         onClick={() => {
           moveTaskDown(taskId, setTask, setOpenActionId);
         }}
         className="actionBtn"
       >
         Down
-        <span>
-          <FaCaretDown className=" down" />
-        </span>
-      </p>
+        <FaCaretDown className=" up" />
+      </Actions>
       {openDeleteDialog && (
         <ConfirmDelete
           setTask={setTask}
