@@ -1,20 +1,28 @@
-.main {
-  height: 100%;
-  padding: 0 20px;
+.app{
+  background-color: #009FBD;
+  height: 100vh;
+  overflow-y: hidden;
+  width:100vw;
+  overflow-x: hidden;
+}
+.header{
+    padding: 0 20px;
 }
 .hidelist {
-  padding: 30px 0px;
+  padding: 30px 20px;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
+  margin: 0 20px;
 }
 .todoFormBox {
   margin-top: 10px;
-  
 }
 .hidelistBtn {
   background-color: #01204e89;
   color: white;
   border: none;
+  width:7rem;
+  font-size: small;
 }
 .hidelistBtn:hover {
   border: none;
@@ -28,7 +36,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  
 }
 .todo-changeList input {
   border: none;
@@ -54,7 +61,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  
 }
 .todo-addTask input {
   border: none;
@@ -77,8 +83,7 @@
   outline: none;
 }
 .myTodoList {
-  padding-top: 0;
-  
+  padding: 0 20px;
 }
 .taskBox {
   display: flex;
@@ -86,9 +91,6 @@
   justify-content: space-between;
   padding: 4px 8px;
   height: 2rem;
-  /* background-color: rebeccapurple; */
-  margin: 10px 0;
-  
 }
 .taskBox:hover {
   background-color: rgba(128, 128, 128, 0.237);
@@ -99,10 +101,6 @@
   cursor: pointer;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.777);
-  
-}
-.taskActions {
-  background-color: rebeccapurple;
 }
 .up,
 .down {
@@ -144,7 +142,6 @@
 }
 .todoContainer {
   margin: 10px 0;
-  
 }
 .actionBtn {
   display: flex;
@@ -234,6 +231,7 @@
   bottom: 0;
   left: 0;
   backdrop-filter: blur(4px);
+  
 }
 .confirmDeleteContent {
   position: relative;
@@ -245,7 +243,7 @@
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
-  padding: 8px 4px;
+  padding: 10px 4px;
 }
 .confirmDeleteHeader {
   margin-top: 1rem;

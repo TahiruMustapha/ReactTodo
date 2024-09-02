@@ -3,7 +3,7 @@ import { getTask } from "../utils/helper";
 import { TaskBox } from "./TaskBox";
 import FormInput from "./FormInput";
 
-interface Task {
+export interface Task {
   id: string;
   name: string;
 }
